@@ -13,7 +13,7 @@ function App() {
     setShowOrders(!showOrders);
   }
   useEffect(() => {
-    fetch('/products').then(res => res.json()).then(data => {
+    fetch('/https://3vur6j5k4j.execute-api.eu-central-1.amazonaws.com/product/get').then(res => res.json()).then(data => {
       setProducts(data);
     });
   },[]);
@@ -25,7 +25,7 @@ function App() {
   },[]);
 
   useEffect(() => {
-    fetch('/order').then(res => res.json()).then (data => {
+    fetch('https://3vur6j5k4j.execute-api.eu-central-1.amazonaws.com/order/get').then(res => res.json()).then (data => {
       setOrders(data);
     });
   },[]);
@@ -55,7 +55,7 @@ function App() {
         value="Submit Order"
           onClick={async () => {
           const orderInfo = { "product_name":productSelect , "quantity":quantity };
-          const response = await fetch("/order", {
+          const response = await fetch("/https://3vur6j5k4j.execute-api.eu-central-1.amazonaws.com/order/post", {
           method: "POST",
             headers: {
               'Content-Type' : 'application/json'
@@ -76,7 +76,7 @@ function App() {
          type="delete"
          value="Delete Orders"
            onClick={async () => {
-           const response = await fetch("/order", {
+           const response = await fetch("/https://3vur6j5k4j.execute-api.eu-central-1.amazonaws.com/order/delete", {
            method: "DELETE",
              headers: {
                'Content-Type' : 'application/json'
