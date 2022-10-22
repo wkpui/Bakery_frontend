@@ -9,11 +9,12 @@ function App() {
   const [orders, setOrders] = useState([]);
   const [showOrders, setShowOrders] = useState(false);
   const [products, setProducts] = useState([]);
+  const api_url = process.env.REACT_APP_BASE_URL;
   const toggleShowOrders = () => {
     setShowOrders(!showOrders);
   }
   useEffect(() => {
-    fetch('/https://3vur6j5k4j.execute-api.eu-central-1.amazonaws.com/product/get').then(res => res.json()).then(data => {
+    fetch(api_url + '/product').then(res => res.json()).then(data => {
       setProducts(data);
     });
   },[]);
@@ -25,7 +26,7 @@ function App() {
   },[]);
 
   useEffect(() => {
-    fetch('https://3vur6j5k4j.execute-api.eu-central-1.amazonaws.com/order/get').then(res => res.json()).then (data => {
+    fetch(api_url + '/order').then(res => res.json()).then (data => {
       setOrders(data);
     });
   },[]);
@@ -39,7 +40,7 @@ function App() {
   	 <label for="productSelect">Select a Product</label>
   	 <select id="productSelect"  value={productSelect}
               onChange={(e) => {
-              setProductSelect(e.target.value);
+              setProductSelect(e.target.key);
            }}>
   	   <option key='1' value='none'>---</option>
            {products.map(({id, price, product_name}) =>
@@ -54,8 +55,8 @@ function App() {
         type="submit"
         value="Submit Order"
           onClick={async () => {
-          const orderInfo = { "product_name":productSelect , "quantity":quantity };
-          const response = await fetch("/https://3vur6j5k4j.execute-api.eu-central-1.amazonaws.com/order/post", {
+          const orderInfo = {"product_id":productSelect , "quantity":quantity };
+          const response = await fetch(api_url + '/order', {
           method: "POST",
             headers: {
               'Content-Type' : 'application/json'
@@ -76,7 +77,7 @@ function App() {
          type="delete"
          value="Delete Orders"
            onClick={async () => {
-           const response = await fetch("/https://3vur6j5k4j.execute-api.eu-central-1.amazonaws.com/order/delete", {
+           const response = await fetch(api_url + '/order', {
            method: "DELETE",
              headers: {
                'Content-Type' : 'application/json'
