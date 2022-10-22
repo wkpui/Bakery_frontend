@@ -9,7 +9,7 @@ function App() {
   const [orders, setOrders] = useState([]);
   const [showOrders, setShowOrders] = useState(false);
   const [products, setProducts] = useState([]);
-  const api_url = process.env.REACT_APP_BASE_URL;
+  const api_url = 'https://3vur6j5k4j.execute-api.eu-central-1.amazonaws.com/prod';
   const toggleShowOrders = () => {
     setShowOrders(!showOrders);
   }
