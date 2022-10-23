@@ -40,12 +40,12 @@ function App() {
   	 <label for="productSelect">Select a Product</label>
   	 <select id="productSelect"  value={productSelect}
               onChange={(e) => {
-              setProductSelect(e.target.key);
+              setProductSelect(e.target.value);
            }}>
   	   <option key='1' value='none'>---</option>
-           {products.map(({product_id, price, product_name}) =>
-             <option key={product_id} value={product_name}>
-               {product_name}
+           {products.map(({product_id, price}) =>
+             <option key={product_id} value={product_id}>
+               {product_id}
              </option>
            )}
            </select>
@@ -55,7 +55,7 @@ function App() {
         type="submit"
         value="Submit Order"
           onClick={async () => {
-          const orderInfo = {"product_id":productSelect , "quantity":quantity };
+          const orderInfo = {"product_name":productSelect , "quantity":quantity };
           const response = await fetch(api_url + '/order', {
           method: "POST",
             headers: {
