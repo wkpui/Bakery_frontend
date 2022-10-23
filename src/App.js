@@ -15,7 +15,7 @@ function App() {
   }
   useEffect(() => {
     fetch(api_url + '/product').then(res => res.json()).then(data => {
-      setProducts(data);
+      setProducts(data.body);
     });
   },[]);
 
@@ -27,7 +27,7 @@ function App() {
 
   useEffect(() => {
     fetch(api_url + '/order').then(res => res.json()).then (data => {
-      setOrders(data);
+      setOrders(data.body);
     });
   },[]);
 
@@ -35,7 +35,7 @@ function App() {
     <div className="App">
        <header className="App-header">
          <img src={logo} className="App-logo" alt="logo" />
-         <p>{msg}</p>
+         <p>welcome</p>
 
   	 <label for="productSelect">Select a Product</label>
   	 <select id="productSelect"  value={productSelect}
