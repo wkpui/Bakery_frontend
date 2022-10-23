@@ -43,8 +43,8 @@ function App() {
               setProductSelect(e.target.key);
            }}>
   	   <option key='1' value='none'>---</option>
-           {products.map(({id, price, product_name}) =>
-             <option key={id} value={product_name}>
+           {products.map(({product_id, price, product_name}) =>
+             <option key={product_id} value={product_name}>
                {product_name}
              </option>
            )}
@@ -68,8 +68,8 @@ function App() {
       </button>
       <button onClick={toggleShowOrders}>Show Orders</button>
       {showOrders &&(<p>
-      {orders.map(({id, product_name, quantity, total_price}) =>
-              <>Order# {id} : {quantity} {product_name} = ${total_price} <br /></>
+      {orders.map(({num_id, product_name, quantity, total_price}) =>
+              <>Order# {num_id} : {quantity} {product_name} = ${total_price} <br /></>
       )} </p>)
       }
       <br /><br /><br />
